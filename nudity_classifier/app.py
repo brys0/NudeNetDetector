@@ -44,8 +44,10 @@ def detect(url):
 
     if not dload_status:
         return json.dumps({"error": "File too large to download"})
+    logger.info("Starting detection of image...")
+    startMilli = int(time.time() * 1000)
     res = detector.detect(path)
-
+    logger.info("Completed detection (ms) in: ", (int(time.time() * 1000) - startMilli))
     try:
         os.remove(path)
     except Exception as e:
